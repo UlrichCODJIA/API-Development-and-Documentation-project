@@ -91,7 +91,7 @@ The API will return three error types when requests fail:
     "Entertainment",
     "Sports"
   ],
-  "success": true,
+  "success": True,
   "total_categories": 6
 }
 ```
@@ -128,7 +128,7 @@ The API will return three error types when requests fail:
       "question": "Hematology is a branch of medicine involving the study of what?"
     }
   ],
-  "success": true,
+  "success": True,
   "total_questions": 3
 }
 ```
@@ -142,7 +142,7 @@ The API will return three error types when requests fail:
 ``` json
 {
     "deleted": 23,
-    "success": true,
+    "success": True,
     "total_questions": 18
 }
 ```
@@ -175,7 +175,7 @@ The API will return three error types when requests fail:
       "question": "La Giaconda is better known as what?"
     }
   ],
-  "success": true
+  "success": True
 }
 ```
 
@@ -220,7 +220,7 @@ The API will return three error types when requests fail:
       "question": "La Giaconda is better known as what?"
     }
   ],
-  "success": true,
+  "success": True,
   "total_questions": 1
 }
 ```
