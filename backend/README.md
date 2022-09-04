@@ -36,6 +36,10 @@ Populate the database using the `trivia.psql` file provided. From the `backend` 
 psql trivia < trivia.psql
 ```
 
+### Fill the env file
+
+Fill the env file with your databases credentials.
+
 ### Run the Server
 
 From within the `./src` directory first ensure you are working using your created virtual environment.

@@ -47,3 +47,180 @@ Pay special attention to what data the frontend is expecting from each API respo
 By making notes ahead of time, you will practice the core skill of being able to read and understand code and will have a simple plan to follow to build out the endpoints of your backend API.
 
 > View the [Frontend README](./frontend/README.md) for more details.
+
+## API Reference
+
+### Getting Started
+
+- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, `http://127.0.0.1:5000/`, which is set as a proxy in the frontend configuration.
+- Authentication: This version of the application does not require authentication or API keys.
+
+### Error Handling
+
+Errors are returned as JSON objects in the following format:
+
+``` json
+{
+    "success": False, 
+    "error": 400,
+    "message": "bad request"
+}
+```
+
+The API will return three error types when requests fail:
+
+- 400: Bad Request
+- 404: Resource Not Found
+- 422: Not Processable
+
+### Endpoints
+
+#### GET '/categories
+
+- Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
+- Request Arguments: None
+- Returns: An object with a single key, `categories`, that contains an object of `id: category_string` key: value pairs.
+
+```json
+{
+  "categories": [
+    "Science",
+    "Art",
+    "Geography",
+    "History",
+    "Entertainment",
+    "Sports"
+  ],
+  "success": true,
+  "total_categories": 6
+}
+```
+
+#### GET /categories/{int:category_id}/questions
+
+- Retrieves questions for a category specified by the id request argument.
+- Request arguments: "id" -integer
+- Returns: an object with questions for the specified category, total questions and the current category string.
+
+``` json
+{
+  "current_category": "Science",
+  "questions": [
+    {
+      "answer": "The Liver",
+      "category": 1,
+      "difficulty": 4,
+      "id": 20,
+      "question": "What is the heaviest organ in the human body?"
+    },
+    {
+      "answer": "Alexander Fleming",
+      "category": 1,
+      "difficulty": 3,
+      "id": 21,
+      "question": "Who discovered penicillin?"
+    },
+    {
+      "answer": "Blood",
+      "category": 1,
+      "difficulty": 4,
+      "id": 22,
+      "question": "Hematology is a branch of medicine involving the study of what?"
+    }
+  ],
+  "success": true,
+  "total_questions": 3
+}
+```
+
+#### DELETE /questions/{int:question_id}
+
+- General:
+  - Deletes the question of the given ID if it exists. Returns the id of the deleted question, success value, total questions.
+- `curl -X DELETE http://127.0.0.1:5000/questions/23?page=2`
+
+``` json
+{
+    "deleted": 23,
+    "success": true,
+    "total_questions": 18
+}
+```
+
+#### POST /quizzes
+
+- Sends a POST request to getthe next question.
+- Query body.
+
+``` json
+{
+  "previous_questions": [18, 19],
+  "quiz_category": {
+    "type": "Art",
+    "id": 1
+  }
+}
+```
+
+- Returns: a list of a single new question object.
+
+``` json
+{
+  "question": [
+    {
+      "answer": "Mona Lisa",
+      "category": 2,
+      "difficulty": 3,
+      "id": 17,
+      "question": "La Giaconda is better known as what?"
+    }
+  ],
+  "success": true
+}
+```
+
+#### POST /questions
+
+- Sends a POST request to add a new question
+- Query body.
+
+``` json
+{
+    "question" : "A new question",
+    "answer" : "A new answer",
+    "difficulty" : 2,
+    "category" : 1,
+}
+```
+
+- Returns: Does not return new data.
+
+#### POST /questions
+
+- Sends a POST request to search for a specific question by search term.
+- Query body.
+
+``` json
+{
+    "searchTerm" : "Giaconda"
+}
+```
+
+- Returns: any question array, a number of questtions that match the search term and the current category string.
+
+``` json
+{
+  "current_category": "Science",
+  "questions": [
+    {
+      "answer": "Mona Lisa",
+      "category": 2,
+      "difficulty": 3,
+      "id": 17,
+      "question": "La Giaconda is better known as what?"
+    }
+  ],
+  "success": true,
+  "total_questions": 1
+}
+```
